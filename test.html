@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+
+    <title>Quasar App - swimbubble</title>
+    <link href="css/all.css" rel="stylesheet">
+    <link rel="icon" href="image/favicon.png" type="image/x-icon">
+    <link href="css/quasar.mat.min.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+      .fa-comments::before{
+        content: '';
+        background: url('image/favicon.png') no-repeat 0 0/100% 100%;
+        width: 30px;
+        height: 27px;
+      }
+      .logo-container {
+        width: 255px;
+        height: 242px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      .logo {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myapp"></div>
+    
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/quasar.mat.umd.min.js"></script>
+    <script src="lib/icons.fontawesome.umd.min.js"></script>
+    <script src="lib/axios.min.js"></script>
+    <script src="lib/require.min.js"></script>
+
+    <script>
+      Quasar.icons.set(Quasar.icons.fontawesome)
+      // require(["abc.js"], function (res) {
+      //   console.log(res)
+      //   // do something after loading index.js
+      // })
+
+      Vue.component('my-page', {
+        template: '#my-page'
+      })
+
+      new Vue({
+        el: '#myapp',
+        data: function () {
+          return {
+            url:'test.html',
+            result:'',
+            version: Quasar.version,
+            drawerState: true
+          }
+        },
+        methods: {
+          launch: function (url) {
+            Quasar.utils.openURL(url)
+          }
+        },
+        mounted(){
+         alert(13221)
+        }
+      })
+    </script>
+  </body>
+</html>
+
