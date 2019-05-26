@@ -1,0 +1,34 @@
+.fa-home{  
+  background-image: url('../image/icon/home.png');
+}
+.fa-find{
+  background-image: url('../image/icon/find.png')
+}
+.fa-release{
+  background-image: url('../image/icon/release.png')
+}
+.fa-mine{
+  background-image: url('../image/icon/mine.png')
+}
+.fa-message{
+  background-image: url('../image/icon/message.png')
+}
+.active .fa-home{  
+  background-image: url('../image/icon/active_home.png');
+}
+.active .fa-find{
+  background-image: url('../image/icon/active_find.png')
+}
+.active .fa-release{
+  background-image: url('../image/icon/active_release.png')
+}
+.active .fa-mine{
+  background-image: url('../image/icon/active_mine.png')
+}
+.active .fa-message{
+  background-image: url('../image/icon/active_message.png')
+}
+
+#home-nav .q-tabs-bar{
+  display: none;
+}

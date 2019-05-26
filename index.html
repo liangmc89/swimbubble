@@ -1,146 +1,51 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
 
-    <title>Quasar App - swimbubble</title>
-    <link href="css/all.css" rel="stylesheet">
-    <link rel="icon" href="image/favicon.png" type="image/x-icon">
-    <link href="css/quasar.mat.min.css" rel="stylesheet" type="text/css">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
 
-    <style type="text/css">
-      .fa-comments::before{
-        content: '';
-        background: url('image/favicon.png') no-repeat 0 0/100% 100%;
-        width: 30px;
-        height: 27px;
-      }
-      .logo-container {
-        width: 255px;
-        height: 242px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-      }
-      .logo {
-        position: absolute;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="q-app">
-      <q-layout view="lHh Lpr fff">
-        <q-layout-header>
-          <q-toolbar
-            :glossy="$q.theme === 'mat'"
-            :inverted="$q.theme === 'ios'"
-          >
-            <q-btn flat round dense @click="drawerState = !drawerState" icon="fas fa-bars"></q-btn>
+  <title>swimbubble</title>
+  <link href="css/styles.css" rel="stylesheet">
+  <link rel="icon" href="image/favicon.png" type="image/x-icon">
+  <link href="css/quasar.mat.min.css" rel="stylesheet" type="text/css">
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+</head>
 
-            <q-toolbar-title>
-              Quasar App - swimbubble
-              <div slot="subtitle">Running on Quasar v{{ version }}</div>
-            </q-toolbar-title>
-          </q-toolbar>
-        </q-layout-header>
-
-        <q-layout-drawer
-          v-model="drawerState"
-          :content-class="$q.theme === 'mat' ? 'bg-grey-3' : null"
-        >
-          <q-list no-border link inset-delimiter>
-            <q-list-header>Essential Links</q-list-header>
-            <q-item @click.native="launch('http://quasar-framework.org')">
-              <q-item-side icon="fas fa-graduation-cap"></q-item-side>
-              <q-item-main label="Docs" sublabel="quasar-framework.org"></q-item-main>
-            </q-item>
-            <q-item @click.native="launch('https://discord.gg/5TDhbDg')">
-              <q-item-side icon="fas fa-comments"></q-item-side>
-              <q-item-main label="Discord Chat Channel" sublabel="https://discord.gg/5TDhbDg"></q-item-main>
-            </q-item>
-            <q-item @click.native="launch('http://forum.quasar-framework.org')">
-              <q-item-side icon="far fa-clipboard"></q-item-side>
-              <q-item-main label="Forum" sublabel="forum.quasar-framework.org"></q-item-main>
-            </q-item>
-            <q-item @click.native="launch('https://twitter.com/quasarframework')">
-              <q-item-side icon="fab fa-twitter"></q-item-side>
-              <q-item-main label="Twitter" sublabel="@quasarframework"></q-item-main>
-            </q-item>
-          </q-list>
-        </q-layout-drawer>
-        <q-layout-footer>
-          <q-tabs>
-            <!-- 选项卡 - 注意slot="title" -->
-            <q-tab default count="5" slot="title" name="tab-1" icon="fas fa-comments" label='首页' @click='url="test.html"' ></q-tab>            
-            <q-tab slot="title" name="tab-2" icon="far fa-comments" label='首页' @click='url="http://www.baidu.com"'></q-tab>
-            <q-tab alert slot="title" name="tab-3" icon="far fa-comments" label='首页'></q-tab>
-            <q-tab slot="title" name="tab-4" icon="fas fa-comments" label='首页'></q-tab>
-            <q-tab slot="title" name="tab-5" icon="fas fa-comments" label='首页'></q-tab>
-          </q-tabs>
-        </q-layout-footer>
-        <q-page-container style='position:fixed;width:100%;height:100%'>
-          <iframe :src="url" frameborder="0" width="100%" height="100%" scrolling='no'></iframe>
-          <!-- <div class="bg-red fit">
-             
-          </div> -->
-          
-          <!-- <my-page></my-page> -->
-        </q-page-container>
-      </q-layout>
-    </div>
-
-    <script type="text/x-template" id="my-page">
-      <q-page padding>
-        <!-- page content; replace this entirely -->
-        <div id='page' class="row flex-center absolute-full">
-          <img src="image/quasar-logo-full.svg">
-        </div>
-
-      </q-page>
-    </script>
-
-    
-    <script src="lib/vue.min.js"></script>
-    <script src="lib/quasar.mat.umd.min.js"></script>
-    <script src="lib/icons.fontawesome.umd.min.js"></script>
-    <script src="lib/axios.min.js"></script>
-    <script src="lib/require.min.js"></script>
-
-    <script>
-      Quasar.icons.set(Quasar.icons.fontawesome)
-      // require(["abc.js"], function (res) {
-      //   console.log(res)
-      //   // do something after loading index.js
-      // })
-
-      Vue.component('my-page', {
-        template: '#my-page'
-      })
-
+<body>
+  <div id="q-app">
+    <q-layout view="lHh Lpr fff">
+      <q-layout-footer>
+        <q-tabs v-model='url' id='home-nav' color='white' text-color='#666666'>
+          <q-tab default slot="title" name="home.html" icon="fas fa-home img-icon" label='首页'></q-tab>
+          <q-tab slot="title" name="find.html" icon="far fa-find img-icon" label='发现'
+            @click='url="http://www.baidu.com"'></q-tab>
+          <q-tab alert slot="title" name="release.html" icon="far fa-release img-icon" label='发布'></q-tab>
+          <q-tab slot="title" name="message.html" icon="fas fa-message img-icon" label='消息'></q-tab>
+          <q-tab slot="title" name="mine.html" icon="fas fa-mine img-icon" label='我的'></q-tab>
+        </q-tabs>
+      </q-layout-footer>
+      <q-page-container style='position:fixed;width:100%;height:100%'>
+        <iframe :src="url" frameborder="0" width="100%" height="100%" scrolling='no'></iframe>
+      </q-page-container>
+    </q-layout>
+  </div>
+  <script src='js/lib/require.min.js' data-main='js/lib/main.js'></script>
+  <script>
+    require(['common'], function (Vue) {
       new Vue({
         el: '#q-app',
-        data: function () {
+        data() {
           return {
-            url:'test.html',
-            result:'',
-            version: Quasar.version,
-            drawerState: true
+            url: 'home.html',
           }
-        },
-        methods: {
-          launch: function (url) {
-            Quasar.utils.openURL(url)
-          }
-        },
-        mounted(){
-         
         }
       })
-    </script>
-  </body>
+    })
+  </script>
+</body>
+
 </html>

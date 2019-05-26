@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us" class="fit">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+  <link href="css/quasar.mat.min.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="css/home.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="fit">
+  <div id="app">
+    <div
+      class="q-toolbar row no-wrap items-center relative-position justify-around q-toolbar-normal bg-white text-white">
+      <div class="q-toolbar-title col-auto">
+        <div class="logo"></div>
+      </div>
+    </div>
+    <q-tabs v-model='tabName' v-cloak align='left' class="home-tabs " color='white' text-color='home-tab'>
+      <q-tab name="tab-1" default slot='title' label='附近动态'></q-tab>
+      <q-tab name="tab-2" slot='title' label='附近的人'></q-tab>
+      <q-tab name="tab-3" slot='title' label='热门视频'></q-tab>
+      <q-tab name="tab-4" slot='title' label='旅游达人'></q-tab>
+      <q-btn :style="{visibility:(tabName=='tab-2'?'visible':'collapse')}" flat slot='title'
+        icon='fa fa-people-filter '></q-btn>
+      <q-tab-pane keep-alive name="tab-1">
+        <div class="relative-position fit">
+          <keep-alive>
+            <nearby-dynamics v-if='tabName=="tab-1"'></nearby-dynamics>
+          </keep-alive>
+        </div>
+      </q-tab-pane>
+      <q-tab-pane keep-alive name="tab-2">
+        <div class="relative-position fit">
+          <keep-alive>
+            <nearby-people v-if='tabName=="tab-2"'></nearby-people>
+          </keep-alive>
+        </div>
+      </q-tab-pane>
+      <!-- <q-tab-pane keep-alive name="tab-3">Tab Three</q-tab-pane>
+      <q-tab-pane keep-alive name="tab-4">Tab Four</q-tab-pane> -->
+
+    </q-tabs>
+  </div>
+  <script type="text/x-template" id='nearby-people'>
+    <scroller ref='scroller' v-cloak :on-refresh="refresh" :on-infinite="infinite" >
+      <q-list  separator no-border multiline>
+        <q-item v-ripple class='user-item wrap' v-for='(item,index) in list' :key='index' >
+            <q-item-side class='user-avatar'>
+              <img class='avatar-img' :src="item.avatar">
+              <img class='crown' src='./image/icon/crown.png'>
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>{{item.userName}}</q-item-tile>
+              <q-item-tile sublabel>
+                  <q-chip dense :icon='item.sex==0?"fa fa-male sm-img-icon":"fa fa-female sm-img-icon"'  :color="item.sex==0?'female':'male'">
+                       {{item.age}}
+                    </q-chip>
+                    <q-chip dense v-if='item.vip!=0'  color="vip">
+                        vip {{item.vip}}
+                    </q-chip>
+              </q-item-tile>              
+            </q-item-main>
+            <q-item-side class='distance' ><timeago :datetime="item.lastActiveTime" ></timeago>·15.2Km</q-item-side>            
+            <div class="signature">{{item.signature}}</div>
+          </q-item> 
+        </q-list>
+    </scroller>
+  </script>
+  <script type='text/x-template' id='nearby-dynamics'>
+    <scroller ref='scroller' v-cloak :on-refresh="refresh" :on-infinite="infinite" >
+        <q-card flat class="q-my-sm" :key='index' v-for='(item,index) in list'>
+            <q-item class='user-item' >
+              <q-item-side class='user-avatar'>
+                <img class='avatar-img' :src="item.user.avatar">
+                <img class='crown' src='./image/icon/crown.png'>
+              </q-item-side>
+              <q-item-main>
+                <q-item-tile label>{{item.user.userName}}</q-item-tile>
+                <q-item-tile sublabel>
+                    <q-chip dense :icon='item.user.sex==0?"fa fa-male sm-img-icon":"fa fa-female sm-img-icon"'  :color="item.user.sex==0?'female':'male'">
+                         {{item.user.age}}
+                      </q-chip>
+                      <q-chip dense v-if='item.user.vip!=0'  color="vip">
+                          vip {{item.user.vip}}
+                      </q-chip>
+                </q-item-tile>
+              </q-item-main>
+              <q-item-side class='distance' ><timeago :datetime="item.article.pubTime" ></timeago>·15.2Km</q-item-side>
+            </q-item>            
+            <q-card-title  class='article-title'>     
+             {{item.article.description}}
+              <q-btn slot="subtitle" flat dense color='allcontent' label='全 文'></q-btn>
+            </q-card-title>
+            <q-card-media>
+              <div class="row media gutter-xs">
+              <template v-for='(m,i) in  item.article.media'>
+                <div :class="getClass(item.article.media.length)" :key='i'>
+                <img v-if='m.type=="image"&&i<=2'  :src="m.src" />
+                <canvas v-else-if='m.type=="video"&&i<=2'  :src='m.src' ></canvas>
+              </div>
+              </template>
+            </div>
+            </q-card-media>
+            <q-card-actions>
+              <q-btn flat icon='fa fa-browseTimes act-icon' color='act-btn' :label='item.article.browseTimes'></q-btn>
+              <q-btn flat icon='fa fa-shareTimes act-icon' color='act-btn' :label='item.article.shareTimes'></q-btn>
+              <q-btn flat icon='fa fa-commentTimes act-icon' color='act-btn' :label='item.article.commentTimes'></q-btn>
+            </q-card-actions>
+            <q-card-separator />
+          </q-card>
+    </scroller>
+  </script>
+
+  <script data-main='js/lib/main.js' src="js/lib/require.min.js"></script>
+  <script>
+    require(['common', 'utils'], function (Vue, utils) {
+      Vue.component('nearby-people', {
+        template:'#nearby-people',
+        data() {
+          return {
+            position: {},
+            list: [],
+            pageIndex: 0,
+            pageCount: 1,
+          }
+        },
+        computed: {
+          scroller() {
+            return this.$refs.scroller
+          }
+        },
+        mounted() {
+
+        },
+        activated() {
+          if (this.position.top) {
+            setTimeout(() => {
+              this.scroller.scrollTo(this.position.left, this.position.top, true)
+            }, 100);
+
+          }
+        },
+        deactivated() {
+          this.position = this.scroller.getPosition()
+        },
+        methods: {
+          refresh: function (done) {
+            this.pageIndex = 1
+            this.getData(done)
+          },
+          infinite: function (done) {
+            if (this.pageIndex < this.pageCount) {
+              this.pageIndex++
+              this.getData(done)
+            } else {
+              this.scroller.finishInfinite(true)
+            }
+          },
+          getData(done) {
+            //let this = this;
+            setTimeout(() => {
+              this.$axios(
+                'https://www.easy-mock.com/mock/5ce8d38015839242d1653eaa/swimbubble/nearbyPeople', {
+                  params: {
+                    pageIndex: this.pageIndex,
+                    pageSize: 10,
+                  }
+                }).then((s) => {
+                if (s.code == 200) {
+                  console.log(s.data)
+                  if (this.pageIndex == 1) {
+                    this.list = s.data
+                  } else {
+                    this.list = this.list.concat(s.data)
+                  }
+                  this.pageCount = s.page.pageCount
+                  if (this.pageIndex < this.pageCount) {
+                    done(false)
+                  } else {
+                    done(true)
+                  }
+                } else {
+                  done(true)
+                }
+                this.scroller.finishPullToRefresh(true)
+              }).catch(e => {
+                if (this.pageIndex > 1) {
+                  this.pageIndex--
+                }
+                done(true)
+                console.log(e)
+              })
+            }, 500)
+          }
+        }
+      })
+      Vue.component('nearby-dynamics', {
+        template: '#nearby-dynamics',
+        data() {
+          return {
+            position: {},
+            list: [],
+            pageIndex: 0,
+            pageCount: 1,
+          }
+        },
+        computed: {
+          scroller() {
+            return this.$refs.scroller
+          }
+        },
+        mounted() {
+
+        },
+        activated() {
+          if (this.position.top) {
+            setTimeout(() => {
+              this.scroller.scrollTo(this.position.left, this.position.top, true)
+            }, 100);
+
+          }
+        },
+        deactivated() {
+          this.position = this.scroller.getPosition()
+        },
+        methods: {
+          getClass(length) {
+            if (length == 1) {
+              return 'one'
+            } else if (length == 2) {
+              return 'col-6'
+            } else {
+              return 'col-4'
+            }
+          },
+          //获取当前用户与附近人的距离
+          getDistance(lat1, lng1, lat2, lng2) {
+            return utils.GetDistance(lat1, lng1, lat2, lng2)
+          },
+          refresh: function (done) {
+            this.pageIndex = 1
+            this.getData(done)
+          },
+          infinite: function (done) {
+            if (this.pageIndex < this.pageCount) {
+              this.pageIndex++
+              this.getData(done)
+            } else {
+              this.scroller.finishInfinite(true)
+            }
+          },
+          getData(done) {
+            //let this = this;
+            setTimeout(() => {
+              this.$axios('https://www.easy-mock.com/mock/5ce8d38015839242d1653eaa/swimbubble/getAritcle', {
+                params: {
+                  pageIndex: this.pageIndex,
+                  pageSize: 10,
+                }
+              }).then((s) => {
+                if (s.code == 200) {
+                  s.data.map(function (m) {
+                    var imgReg = /<[img|video].*?(?:>|\/>)/gi;
+                    var media = m.article.content.match(imgReg)
+                    var list = [];
+                    media.forEach(function (f) {
+                      var dom = document.createElement('div')
+                      dom.innerHTML = f;
+                      var mediaItem = dom.childNodes[0]
+                      if (mediaItem.nodeName == 'VIDEO') {
+                        // mediaItem.setAttribute("crossOrigin",'Anonymous')
+                        // var scale = 0.8;                                                
+                        // var captureImage = function () {
+                        //   debugger
+                        //   var canvas = document.createElement("canvas");
+                        //   canvas.width = mediaItem.videoWidth * scale;
+                        //   canvas.height = mediaItem.videoHeight * scale;
+                        //   canvas.getContext('2d').drawImage(mediaItem, 0, 0, canvas.width, canvas
+                        //     .height);
+                        //   list.push({type:'video',source:mediaItem.src,src:canvas.toDataURL("image/png")})
+                        // };  
+                        // mediaItem.addEventListener('loadeddata', captureImage);
+                        // mediaItem.load()                      
+                      } else if (mediaItem.nodeName == 'IMG') {
+                        list.push({
+                          type: 'image',
+                          src: mediaItem.src
+                        })
+                      }
+                    })
+                    m.article['media'] = list
+                    return m
+                  })
+                  console.log(s.data)
+                  if (this.pageIndex == 1) {
+                    this.list = s.data
+                  } else {
+                    this.list = this.list.concat(s.data)
+                  }
+                  this.pageCount = s.page.pageCount
+                  if (this.pageIndex < this.pageCount) {
+                    done(false)
+                  } else {
+                    done(true)
+                  }
+                } else {
+                  done(true)
+                }
+                this.scroller.finishPullToRefresh(true)
+              }).catch(e => {
+                if (this.pageIndex > 1) {
+                  this.pageIndex--
+                }
+                done(true)
+                console.log(e)
+              })
+            }, 500)
+
+          }
+        }
+      });
+      new Vue({
+        el: '#app',
+        data() {
+          return {
+            tabName: 'tab-1',
+          }
+        },
+        mounted(){
+          
+        }
+      });
+    })
+  </script>
+</body>
+
+</html>

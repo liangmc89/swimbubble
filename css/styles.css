@@ -1,1 +1,29 @@
-
+.img-icon{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.img-icon:before{
+  content: '';
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.logo{
+  width: 4.43rem;
+  height: 1.43rem;
+  background:url('../image/logo.png') no-repeat 0 0/ 100% 100%;
+}
+#app{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+}
+.scroll-box{
+  flex: 1;
+  position: relative;
+}
+[v-cloak]{  
+  display: none
+}
+ 

@@ -1,0 +1,150 @@
+.home-tabs{  
+  flex: 1;
+}
+.home-tabs .q-tabs-panes{
+  flex: 1;
+}
+.home-tabs .q-tabs-head{
+  box-shadow:3px 5px 15px 0px rgba(227,227,227,0.51);
+}
+.home-tabs .q-tab-pane{
+  height: 100%;
+}
+.text-home-tab{
+  color:#333333;
+}
+.home-tabs .active .q-tabs-bar{
+  display:none;
+}
+.home-tabs .active .q-tab-label{
+  font-size: 1.15rem;  
+  font-weight: bold; 
+  border-bottom:2px solid #2EFAA1;
+}
+.home-tabs .highlight{
+ display: none
+}
+.sm-img-icon{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.sm-img-icon::before{
+  content:'';
+  width: .6rem;
+  height: .6rem;
+}
+.act-icon{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.act-icon::before{
+  content:'';
+  width: 1rem;
+  height: 1rem;
+}
+.fa-browseTimes{
+  background-image: url('../image/icon/browertimes.png')
+}
+.fa-shareTimes{
+  background-image: url('../image/icon/sharetimes.png')
+}
+.fa-commentTimes{
+  background-image: url('../image/icon/commenttimes.png')
+}
+.fa-male{
+  background-image: url('../image/icon/female.png')
+}
+.fa-female{
+  background-image: url('../image/icon/male.png')
+}
+.bg-female{
+  background-color: #FF1856
+}
+.bg-male{
+ background-color: #7CFFFF
+}
+.bg-vip{
+  background-color: #FACC2E
+}
+.distance{
+  font-size: .6rem;
+  color: #999999
+}
+.user-avatar{
+  width: 2.75rem;
+  height: 2.75rem;
+  position: relative;
+}
+.avatar-img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.crown{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1rem;
+  height: 1rem;
+}
+.article-title{
+  padding: .4rem 0;
+  
+}
+.article-title .q-card-title{
+  /* text-indent: 2rem; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  font-size: .81rem;
+  color:#333333;
+  line-height: 1.25rem;
+  letter-spacing: .05rem;
+}
+.text-allcontent{
+  padding: .8rem 0;
+  color: #2ECCFA
+}
+.text-act-btn{
+  color: #999999
+}
+.user-item{
+  padding: .5rem .1rem;
+}
+.media{
+  /* max-height: 12rem; */
+  border-radius: .3rem;
+}
+.one{
+  max-height: 100%;
+  border-radius: .3rem;
+}
+.media img{
+  border-radius: .3rem;
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+.fa-people-filter::before{
+  width: 1.25rem;
+  height: 1.25rem;
+  content: '';
+}
+.fa-people-filter{
+  background-image: url('../image/icon/people_filter.png');
+}
+.signature{
+  margin: .2rem auto;
+  padding: .3rem 0 .3rem 2.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  line-height: 1.25rem;
+  font-size: .75rem;
+  color: #999999;
+}
+
